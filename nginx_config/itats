@@ -1,0 +1,20 @@
+server {
+  listen 80;
+  server_name www.mmofficial.com;
+  root /usr/share/nginx/html/mmofc/;
+  index index.php index.html;
+
+	location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass 127.0.0.1:9000;
+        }
+
+        location ~ /\.ht {
+               deny all;
+        }
+}
